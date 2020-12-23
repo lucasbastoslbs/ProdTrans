@@ -58,7 +58,6 @@ public class Home extends javax.swing.JFrame {
         jTableLista = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabelBD = new javax.swing.JLabel();
-        jButtonAlterarSituacao = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuCadastroMercado = new javax.swing.JMenuItem();
@@ -96,14 +95,6 @@ public class Home extends javax.swing.JFrame {
 
         jLabelBD.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabelBD.setText("OFF");
-
-        jButtonAlterarSituacao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButtonAlterarSituacao.setText("Alterar Situação");
-        jButtonAlterarSituacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAlterarSituacaoActionPerformed(evt);
-            }
-        });
 
         jMenu1.setText("Cadastro");
 
@@ -152,20 +143,18 @@ public class Home extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonAlterarSituacao)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(260, 260, 260)
-                            .addComponent(jLabel1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(21, 21, 21)
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabelBD))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(38, 38, 38)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(260, 260, 260)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelBD))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -173,9 +162,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addGap(21, 21, 21)
-                .addComponent(jButtonAlterarSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(77, 77, 77)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -200,28 +187,8 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuListaNovaActionPerformed
 
     private void jMenuListaConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListaConsultaActionPerformed
-        //tabela com produtos da lista
+        new ProdutosLista(JOptionPane.showInputDialog(null, "Lista a ser consultada")).setVisible(true);
     }//GEN-LAST:event_jMenuListaConsultaActionPerformed
-
-    private void jButtonAlterarSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarSituacaoActionPerformed
-        int linha = jTableLista.getSelectedRow();
-        ID = Integer.parseInt(jTableLista.getValueAt(linha, 0)+"");
-        String[] situacao = {"Aberta", "Em Separação", "Separada" , "Concluída" , "Cancelada"};
-        JComboBox jcb = new JComboBox();
-        for (int i = 0; i < situacao.length; i++) {
-            jcb.addItem(situacao[i]);
-        }
-        JOptionPane.showMessageDialog(null, jcb, "Situação da lista", JOptionPane.QUESTION_MESSAGE);
-        String sit = jcb.getSelectedItem()+"";
-        String query = "UPDATE lista SET situacao='"+sit+"' where id="+ID;
-        if (linha != -1) ok = mysqlr.executeUpdate(query);
-        if(ok == 1){
-            JOptionPane.showMessageDialog(null, "Alterado para "+sit);
-            listas();
-        } else {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar status da lista"+ID);
-        }
-    }//GEN-LAST:event_jButtonAlterarSituacaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,7 +227,6 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAlterarSituacao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelBD;
