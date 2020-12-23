@@ -1,0 +1,1 @@
+- criacao da lista (home->lista->nova lista) + botao finalizar
